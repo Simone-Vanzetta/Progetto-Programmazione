@@ -1,0 +1,65 @@
+.row {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    text-align: center;
+}
+.body {
+    background-image: linear-gradient(to right, rgb(11, 136, 0), rgb(3, 1, 121));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #696969;
+    font-family: sans-serif;
+}
+.card {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+
+}
+.card-text, .card-title {
+    color: white;
+}
+.h1 {
+    color:white;
+}
+.form {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 40px 20px;
+    border-radius: 10px;  
+}
+.form-control {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 10px;
+}
+.btn, .btn-primary {
+    border-radius: 10px;
+    background-color: transparent;
+    transition: 0.2s;
+    border-color: rgba(255, 255, 255, 0.548);
+}
+.btn:hover, .btn-primary:hover{
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.dropdown-menu, .dropdown-menu-right {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+.dropdown-item {
+    color: white;
+}
+.dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.623);
+    color: white;
+}
