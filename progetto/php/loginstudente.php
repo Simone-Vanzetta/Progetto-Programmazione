@@ -13,26 +13,6 @@
     {
         /*  
             Se l'Utente inserisce la Mail 
-            ma NON inserisce la Password
-        */
-        if ($email==null || $password=="") {
-            echo "
-            <head>
-                <link rel=\"stylesheet\" href=\"/./progetto/css/bootstrap.min.css\">
-                <link rel=\"stylesheet\" href=\"/./progetto/css/style.css\">
-                <title>Errore Login</title>
-            </head>
-            <body class=\"body\">
-                <div class=\"form\">
-                    DEVI indicare la tua <b>Password</b> <br>
-                    <a href=\"./../html/loginstudente.html\">
-                        <button class=\"btn btn-primary\">Ritorna alla pagina di Login</button>
-                    </a>
-                </div>
-            </body>";
-        }
-        /*  
-            Se l'Utente inserisce la Mail 
             e la Password corretti (presenti nel DB) viene
             spedito alla pagina "esamistudente.php"
         */
@@ -50,7 +30,7 @@
             }
                 
             //Ricaviamo le informazioni sull'utente collegate alla sua email
-            $sql = "SELECT nome, cognome, password, matricola FROM studenti WHERE email= '$email'";
+            $sql = "SELECT nome, cognome, password, matricola, email FROM studenti WHERE email= '$email'";
             $result = $conn->query($sql);
                 
             if ($result->num_rows > 0) {
@@ -60,17 +40,18 @@
                     $_SESSION["cognome"] = $row["cognome"];
                     $_SESSION["matricola"] = $row["matricola"];
                     $_SESSION["password"] = $row["password"];
+                    $_SESSION["email"] = $row["email"];
                     }
                 }
         //L'utente può effetuare il login solo se la password è quella corrispondente alla sua email
-         if ($password == $_SESSION["password"]) {
+         if ($password == $_SESSION["password"] && $email == $_SESSION["email"]) {
             header("Location:esamistudente.php");
         }
         /*  
             Se l'Utente inserisce la Mail 
             e la Password NON corretti
         */
-        else {
+        if ($password != $_SESSION["password"]) {
             echo "
             <head>
                 <link rel=\"stylesheet\" href=\"/./progetto/css/bootstrap.min.css\">
