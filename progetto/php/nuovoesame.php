@@ -1,4 +1,4 @@
-<html>
+<<html>
 <head>
 <link rel="stylesheet" href="/./progetto/css/bootstrap.min.css">
 <link rel="stylesheet" href="/./progetto/css/style.css">
@@ -12,13 +12,13 @@ session_start();
 Includo il file FormUserInput per controllare
 se sono settate le variabili POST
 */
+
 include "./../functions/formUserInput.php";
 
 $nome = ReadString("nome");
 $descrizione = ReadString("descrizione");
 $data = ReadString("data");
 $orario = ReadString("orario");
-$dipartimento = ReadString("dipartimento");
 $aula = ReadString("aula");
 
 
@@ -36,11 +36,19 @@ $conn = mysqli_connect($servername, $username, $password, $dbname );
 
 if (!$conn) {
     die("Connessione al DB fallita: " . mysqli_connect_error());
-} 
+}
+
+//Inserisco i dati della form HTML nella tabella
+
 $sql = "INSERT INTO esami (Nome, Descrizione, Data, Orario, Dipartimento, Aula)
-VALUES ('".$nome."','".$descrizione."','".$data."','".$orario."','".$dipartimento."','".$aula."');";
+VALUES ('".$nome."','".$descrizione."','".$data."','".$orario."','".$aula."');";
 $result = $conn->query($sql);
 
+/*
+Dico all'utente che ha inserito i dati
+e metto un pulsante che ritorna a 
+"esamiinsegnante.php"
+*/
 echo "
 <div class=\"form\">
     Esame inserito correttamente!<br>
