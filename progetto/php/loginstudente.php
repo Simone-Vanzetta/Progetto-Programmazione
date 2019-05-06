@@ -1,18 +1,14 @@
 <?php
   session_start();
-
   /*
     Includo il file FormUserInput e uso la funzione 
     Readstring per controllare se sono settati
     email e password
   */
-
    include "./../functions/formUserInput.php";
     $email = ReadString("email");
     $password = ReadString("password");
-
     
-
     if ( $email!=null)
     {
         /*  
@@ -37,13 +33,38 @@
         }
         /*  
             Se l'Utente inserisce la Mail 
-            e la Password corretti viene
+            e la Password corretti (presenti nel DB) viene
             spedito alla pagina "esamistudente.php"
         */
-        else if ($email=="mario.rossi@gmail.com" && $password=="mariorossi") {
-                $_SESSION["email"]=$email;
-		        $_SESSION["password"]=$password;    
-        header("Location:esamistudente.php");
+        $servername = "localhost";
+            $username = "root";
+            $passworddb = "";
+            $dbname = "essequattro";
+            //Accesso al Database per recuperare le informazioni sull'utente
+            //Creazione connessione
+            $conn = mysqli_connect($servername, $username, $passworddb, $dbname );
+            // Controllo della connessione
+            if (!$conn) {
+                die("Connessione al DB fallita: " . mysqli_connect_error());
+            } else {
+            }
+                
+            //Ricaviamo le informazioni sull'utente collegate alla sua email
+            $sql = "SELECT nome, cognome, password, matricola FROM studenti WHERE email= '$email'";
+            $result = $conn->query($sql);
+                
+            if ($result->num_rows > 0) {
+                // mettiamo le sue info in variabili di tipo session per poterle recuperare comodamente
+                while($row = $result->fetch_assoc()) {
+                    $_SESSION["nome"] = $row["nome"];
+                    $_SESSION["cognome"] = $row["cognome"];
+                    $_SESSION["matricola"] = $row["matricola"];
+                    $_SESSION["password"] = $row["password"];
+                    }
+                }
+        //L'utente può effetuare il login solo se la password è quella corrispondente alla sua email
+         if ($password == $_SESSION["password"]) {
+            header("Location:esamistudente.php");
         }
         /*  
             Se l'Utente inserisce la Mail 
