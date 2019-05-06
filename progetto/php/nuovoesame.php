@@ -1,7 +1,8 @@
 <<html>
 <head>
-<link rel="stylesheet" href="/./progetto/css/bootstrap.min.css">
-<link rel="stylesheet" href="/./progetto/css/style.css">
+    <link rel="stylesheet" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../css/style.css">
+    <title>Nuovo Esame</title>
 </head>
 <body class="body"></body>
 </html>
