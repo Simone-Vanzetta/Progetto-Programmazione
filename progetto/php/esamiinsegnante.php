@@ -1,6 +1,6 @@
 <?php
 session_start();
-/*
+  /*
   Se l'Utente prova ad accedere alla pagina
   direttamente dall'URL senza aver fatto il Login,
   viene reindirizzato alla pagina "index.html"
@@ -37,7 +37,7 @@ session_start();
           </ul>
           <div class="btn-group">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Nome Utente
+            <?php echo $_SESSION["nome"]." ". $_SESSION["cognome"]; ?>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">
@@ -66,17 +66,16 @@ $conn = mysqli_connect($servername, $username, $password, $dbname );
 
 if (!$conn) {
     die("Connessione al DB fallita: " . mysqli_connect_error());
-} else {
-    echo "Mi sono connesso";
-    echo "<br>";
-}
+} 
 
 $sql = "SELECT Nome, Descrizione, Data, Orario, Dipartimento, Aula FROM esami";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table class=\"table table-striped table-dark\">"; 
+
     // Output dei dati di ciascuna riga del Database   
+
     while($row = $result->fetch_assoc()) {
        $nome = $row["Nome"];
        $descrizione = $row["Descrizione"];
@@ -84,14 +83,14 @@ if ($result->num_rows > 0) {
        $orario = $row["Orario"];
        $dipartimento = $row["Dipartimento"];
        $orario = $row["Aula"];
+
     //Stampo in ogni riga della tabella HTML i dati del Database
+
        echo "<tr><td>" . $row['Nome'] ."</td><td>". $row['Descrizione'] ."</td><td>". $row['Data'] ."</td><td>". $row['Orario'] ."</td><td>". $row['Dipartimento'] ."</td><td>". $row['Aula'] ."</td><td>". "</td></tr>"; 
     }
     echo "</table>";
    
-} else {
-    echo "0 results";
-}
+} 
 $conn->close();
 ?>
       <div class="form">
