@@ -1,3 +1,12 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../css/style.css">
+    <title>Errore Login</title>
+<head>
+<body class="body">
+</body>  
+</html>
 <?php
   session_start();
   /*
@@ -54,19 +63,12 @@
         */
         else {
             echo "
-            <head>
-                <link rel=\"stylesheet\" href=\"/./progetto/css/bootstrap.min.css\">
-                <link rel=\"stylesheet\" href=\"/./progetto/css/style.css\">
-                <title>Errore Login</title>
-            </head>
-            <body class=\"body\">
                 <div class=\"form\">
                     <b>Username</b> e/o <b>Password</b> non corretti <br>
                     <a href=\"./../html/logininsegnante.html\">
                         <button class=\"btn btn-primary\">Ritorna alla pagina di Login</button>
                     </a>
-                </div>  
-            </body>";
+                </div>";
         }    
     }
     /*  
@@ -75,19 +77,12 @@
     */
       if ($email==null && $password==null) {
         echo "
-        <head>
-            <link rel=\"stylesheet\" href=\"/./progetto/css/bootstrap.min.css\">
-            <link rel=\"stylesheet\" href=\"/./progetto/css/style.css\">
-            <title>Errore Login</title>
-        </head>
-        <body class=\"body\">
             <div class=\"form\">
                 Specificare una <b>Email</b> e una <b>Password</b> <br>
                 <a href=\"./../html/logininsegnante.html\">
                     <button class=\"btn btn-primary\">Ritorna alla pagina di Login</button>
                 </a>
-            </div>  
-        </body>";
+            </div>";
     }
     /*  
         Se l'utente inserisce la Password 
@@ -95,18 +90,11 @@
     */
     if ($email==null && $password!=null) {
         echo "
-        <head>
-            <link rel=\"stylesheet\" href=\"/./progetto/css/bootstrap.min.css\">
-            <link rel=\"stylesheet\" href=\"/./progetto/css/style.css\">
-            <title>Errore Login</title>
-        </head>
-        <body class=\"body\">
             <div class=\"form\">
                 Devi specificare la tua <b>Email</b> <br>
                 <a href=\"./../html/logininsegnante.html\">
                     <button class=\"btn btn-primary\">Ritorna alla pagina di Login</button>
                 </a>
-            </div>  
-        </body>";
+            </div>";
     }
 ?>
