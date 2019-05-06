@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/./progetto/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/./progetto/css/style.css">
+    <title>Nuovo Esame</title>
+</head>
+<body class="body">
+    <form class="form" action="./../php/nuovoesame.php" method="POST">
+        <div class="form-group">
+          <label for="formGroupExampleInput" color="white">Nome</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" required="required" name="nome">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Descrizione</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="150" name="descrizione"></textarea>
+          </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Data</label>
+          <input type="date"class="form-control" id="formGroupExampleInput2" placeholder="Another input" required="required" name="data">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput3">Orario</label>
+            <input type="time" class="form-control" id="formGroupExampleInput3" placeholder="Another input" required="required" name="orario">
+          </div>
+          <div class="form-group">
+            <label for="facoltaPoli">Dipartimento</label>
+            <select id="facoltaPoli" name="facoltaPoli" class="form-control" onchange="reloadFormWithRefresh(this.form)" required="required" name="dipartimento">
+              <option value="F10033" title="Centro Agricoltura Alimenti Ambiente - C3A&nbsp;​(DIP)">Centro Agricoltura Alimenti Ambiente - C3A&nbsp;​(DIP)</option>
+              <option value="F10027" title="Centro Interdipartimentale Biologia Integrata- CIBio&nbsp;​(DIP)">Centro Interdipartimentale Biologia Integrata- CIBio&nbsp;​(DIP)</option>
+              <option value="F10030" title="Centro interdipartimentale Mente/Cervello- CIMeC &nbsp;​(DIP)">Centro interdipartimentale Mente/Cervello- CIMeC &nbsp;​(DIP)</option>
+              <option value="F10032" title="Centro Linguistico d'Ateneo&nbsp;​(DIP)">Centro Linguistico d'Ateneo&nbsp;​(DIP)</option>
+              <option value="F10019" title="Dipartimento di Economia e Management&nbsp;​(DIP)">Dipartimento di Economia e Management&nbsp;​(DIP)</option>
+              <option value="F10025" title="Dipartimento di Fisica&nbsp;​(DIP)">Dipartimento di Fisica&nbsp;​(DIP)</option>
+              <option value="F10021" title="Dipartimento di Ingegneria Civile, Ambientale e Meccanica&nbsp;​(DIP)">Dipartimento di Ingegneria Civile, Ambientale e Meccanica&nbsp;​(DIP)</option>
+              <option value="F10023" title="Dipartimento di Ingegneria e Scienza dell'Informazione&nbsp;​(DIP)">Dipartimento di Ingegneria e Scienza dell'Informazione&nbsp;​(DIP)</option>
+              <option value="F10022" title="Dipartimento di Ingegneria Industriale&nbsp;​(DIP)">Dipartimento di Ingegneria Industriale&nbsp;​(DIP)</option>
+              <option value="F10024" title="Dipartimento di Lettere e Filosofia&nbsp;​(DIP)">Dipartimento di Lettere e Filosofia&nbsp;​(DIP)</option>
+              <option value="F10026" title="Dipartimento di Matematica&nbsp;​(DIP)">Dipartimento di Matematica&nbsp;​(DIP)</option>
+              <option value="F10029" title="Dipartimento di Psicologia e Scienze Cognitive&nbsp;​(DIP)" selected>Dipartimento di Psicologia e Scienze Cognitive&nbsp;​(DIP)</option>
+              <option value="F10028" title="Dipartimento di Sociologia e Ricerca Sociale&nbsp;​(DIP)">Dipartimento di Sociologia e Ricerca Sociale&nbsp;​(DIP)</option>
+              <option value="F10020" title="Facolt&agrave; di Giurisprudenza&nbsp;​(DIP)">Facolt&agrave; di Giurisprudenza&nbsp;​(DIP)</option>
+              <option value="F10031" title="Scuola di studi Internazionali&nbsp;​(DIP)">Scuola di studi Internazionali&nbsp;​(DIP)</option></select>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput5">Aula</label>
+            <input type="text" class="form-control" id="formGroupExampleInput5" required="required" name="aula">
+          </div>
+         
+          
+          <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Inserisci nuovo esame">Inserisci nuovo esame</button>
+      </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/./progetto/js/bootstrap.min.js"></script>
+</body>
+</html>
