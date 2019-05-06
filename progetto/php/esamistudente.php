@@ -37,7 +37,7 @@
           </ul>
           <div class="btn-group">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <?php echo $_SESSION["email"]; ?>
+              <?php echo $_SESSION["nome"]." ". $_SESSION["cognome"]; ?>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">
