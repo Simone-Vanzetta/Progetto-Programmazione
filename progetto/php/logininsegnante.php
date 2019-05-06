@@ -11,27 +11,11 @@
     
     if ( $email!=null)
     {
-        /*  
+       /*  
             Se l'Utente inserisce la Mail 
-            ma NON inserisce la Password
+            e la Password corretti (presenti nel DB) viene
+            spedito alla pagina "esamistudente.php"
         */
-        if ($email==null || $password=="") {
-            echo "
-            <head>
-                <link rel=\"stylesheet\" href=\"/./progetto/css/bootstrap.min.css\">
-                <link rel=\"stylesheet\" href=\"/./progetto/css/style.css\">
-                <title>Errore Login</title>
-            </head>
-            <body class=\"body\">
-                <div class=\"form\">
-                    DEVI indicare la tua <b>Password</b> <br>
-                    <a href=\"./../html/logininsegnante.html\">
-                        <button class=\"btn btn-primary\">Ritorna alla pagina di Login</button>
-                    </a>
-                </div>
-            </body>";
-        }
-
         $servername = "localhost";
         $username = "root";
         $passworddb = "";
@@ -46,7 +30,7 @@
         }
             
         //Ricaviamo le informazioni sull'utente collegate alla sua email
-        $sql = "SELECT nome, cognome, password, id FROM professori WHERE email= '$email'";
+        $sql = "SELECT nome, cognome, password, id, email FROM professori WHERE email= '$email'";
         $result = $conn->query($sql);
             
         if ($result->num_rows > 0) {
@@ -56,23 +40,14 @@
                 $_SESSION["cognome"] = $row["cognome"];
                 $_SESSION["id"] = $row["id"];
                 $_SESSION["password"] = $row["password"];
+                $_SESSION["email"] = $row["email"];
                 }
             }
     //L'utente può effetuare il login solo se la password è quella corrispondente alla sua email
      if ($password == $_SESSION["password"]) {
-        header("Location:esamistudente.php");
+        header("Location:esamiinsegnante.php");
     }
-
-        /*  
-            Se l'Utente inserisce la Mail 
-            e la Password corretti viene
-            spedito alla pagina "esamiinsegnante.html"
-        */
-        else if ($email=="professore.rossi@gmail.com" && $password=="professorerossi") {
-                $_SESSION["email"]=$email;
-		        $_SESSION["password"]=$password;    
-        header("Location:./../html/esamiinsegnante.html");
-        }
+        
         /*  
             Se l'Utente inserisce la Mail 
             e la Password NON corretti
