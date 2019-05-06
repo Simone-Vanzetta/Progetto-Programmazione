@@ -68,7 +68,7 @@ if (!$conn) {
     die("Connessione al DB fallita: " . mysqli_connect_error());
 } 
 
-$sql = "SELECT Nome, Descrizione, Data, Orario, Dipartimento, Aula FROM esami";
+$sql = "SELECT Nome, Descrizione, Data, Orario, Aula FROM esami";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -81,12 +81,11 @@ if ($result->num_rows > 0) {
        $descrizione = $row["Descrizione"];
        $data = $row["Data"];
        $orario = $row["Orario"];
-       $dipartimento = $row["Dipartimento"];
        $orario = $row["Aula"];
 
     //Stampo in ogni riga della tabella HTML i dati del Database
 
-       echo "<tr><td>" . $row['Nome'] ."</td><td>". $row['Descrizione'] ."</td><td>". $row['Data'] ."</td><td>". $row['Orario'] ."</td><td>". $row['Dipartimento'] ."</td><td>". $row['Aula'] ."</td><td>". "</td></tr>"; 
+       echo "<tr><td>" . $row['Nome'] ."</td><td>". $row['Descrizione'] ."</td><td>". $row['Data'] ."</td><td>". $row['Orario'] ."</td><td>". $row['Aula'] ."</td><td>". "</td></tr>"; 
     }
     echo "</table>";
    
