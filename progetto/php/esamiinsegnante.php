@@ -50,7 +50,7 @@ session_start();
           </div>
         </div>
       </nav>
-      
+
 <?php
 
 $servername = "localhost";
@@ -68,35 +68,53 @@ if (!$conn) {
     die("Connessione al DB fallita: " . mysqli_connect_error());
 } 
 
-$sql = "SELECT Nome, Descrizione, Data, Orario, Aula FROM esami";
+$sql = "SELECT ID, Nome, Descrizione, Data, Orario, Aula FROM esami";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table class=\"table table-striped table-dark\">"; 
+    echo "<table class=\"table table-striped table-dark\" style=\"background-color: rgba(0, 0, 0, 0.5); margin-top: 10px;\">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Breve Descrizione</th>
+        <th>Data</th>
+        <th>Orario</th>
+        <th>Aula</th>
+    </tr>
+    "; 
 
     // Output dei dati di ciascuna riga del Database   
 
     while($row = $result->fetch_assoc()) {
+       
+       $id = $row["ID"];
        $nome = $row["Nome"];
        $descrizione = $row["Descrizione"];
        $data = $row["Data"];
        $orario = $row["Orario"];
        $orario = $row["Aula"];
+       
 
     //Stampo in ogni riga della tabella HTML i dati del Database
 
-       echo "<tr><td>" . $row['Nome'] ."</td><td>". $row['Descrizione'] ."</td><td>". $row['Data'] ."</td><td>". $row['Orario'] ."</td><td>". $row['Aula'] ."</td><td>". "</td></tr>"; 
+       echo "<tr><td>" . $row['ID'] . "</td><td>" . $row['Nome'] ."</td><td>". $row['Descrizione'] ."</td><td>". $row['Data'] ."</td><td maxlength=\"5\">". $row['Orario'] ."</td><td>". $row['Aula'] ."</td><td>". "</td></tr>"; 
     }
     echo "</table>";
    
 } 
 $conn->close();
 ?>
-      <div class="form">
+        <div class="card">
         <a href="./../html/nuovoesame.html">
-          <button type="button" class="btn btn-primary">Inserisci nuovo esame</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" id="exam">Inserisci Nuovo Esame</button>
         </a>
-      </div>
+        </div>
+        
+        <div class="card">
+        <a href="./../php/rimuoviesame.php">
+          <button type="button" class="btn btn-danger btn-lg btn-block" id="exam">Rimuovi Un Esame</button>
+        </a>
+        </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="/./progetto/js/bootstrap.min.js"></script>
