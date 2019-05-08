@@ -9,72 +9,117 @@
 </html>
 <?php
   session_start();
+
   /*
     Includo il file FormUserInput e uso la funzione 
     Readstring per controllare se sono settati
     email e password
   */
+
    include "./../functions/formUserInput.php";
     $email = ReadString("email");
     $password = ReadString("password");
+
+    //Se la mail viene inserita
     
     if ( $email!=null)
     {
-       /*  
-            Se l'Utente inserisce la Mail 
-            e la Password corretti (presenti nel DB) viene
-            spedito alla pagina "esamistudente.php"
+         /*  
+        Se l'utente inserisce la Mail
+        ma NON inserisce la Password
         */
-        $servername = "localhost";
-        $username = "root";
-        $passworddb = "";
-        $dbname = "essequattro";
-        //Accesso al Database per recuperare le informazioni sull'utente
-        //Creazione connessione
-        $conn = mysqli_connect($servername, $username, $passworddb, $dbname );
-        // Controllo della connessione
-        if (!$conn) {
-            die("Connessione al DB fallita: " . mysqli_connect_error());
-        } else {
-        }
-            
-        //Ricaviamo le informazioni sull'utente collegate alla sua email
-        $sql = "SELECT nome, cognome, password, id, email FROM professori WHERE email= '$email'";
-        $result = $conn->query($sql);
-            
-        if ($result->num_rows > 0) {
-            // mettiamo le sue info in variabili di tipo session per poterle recuperare comodamente
-            while($row = $result->fetch_assoc()) {
-                $_SESSION["nome"] = $row["nome"];
-                $_SESSION["cognome"] = $row["cognome"];
-                $_SESSION["id"] = $row["id"];
-                $_SESSION["password"] = $row["password"];
-                $_SESSION["email"] = $row["email"];
-                }
-            }
-    //L'utente può effetuare il login solo se la password è quella corrispondente alla sua email
-     if ($password == $_SESSION["password"]) {
-        header("Location:esamiinsegnante.php");
-    }
-        
-        /*  
-            Se l'Utente inserisce la Mail 
-            e la Password NON corretti
-        */
-        else {
+                
+        if ($password == null) {
             echo "
+            <body class=\"body\">
                 <div class=\"form\">
-                    <b>Username</b> e/o <b>Password</b> non corretti <br>
+                    Devi specificare la tua <b>Password</b> <br>
                     <a href=\"./../html/logininsegnante.html\">
                         <button class=\"btn btn-primary\">Ritorna alla pagina di Login</button>
                     </a>
                 </div>";
-        }    
+                exit;
+        } 
+        
+        //Accesso al Database per recuperare le informazioni sull'utente
+
+            $servername = "localhost";
+            $username = "root";
+            $passworddb = "";
+            $dbname = "essequattro";
+
+            
+
+            //Creazione connessione
+
+            $conn = mysqli_connect($servername, $username, $passworddb, $dbname );
+            
+            // Controllo della connessione
+            if (!$conn) {
+                die("Connessione al DB fallita: " . mysqli_connect_error());
+            } else {
+            }
+                
+            // Ricaviamo le informazioni sull'utente collegate alla sua email
+
+            $sql = "SELECT nome, cognome, password, id, email FROM professori WHERE email= '$email'";
+            $result = $conn->query($sql);
+                
+            if ($result->num_rows > 0) {
+
+            // Mettiamo le sue info in variabili di tipo session per poterle recuperare comodamente
+
+                while($row = $result->fetch_assoc()) {
+                    $_SESSION["nome"] = $row["nome"];
+                    $_SESSION["cognome"] = $row["cognome"];
+                    $_SESSION["id"] = $row["id"];
+                    $_SESSION["password"] = $row["password"];
+                    $_SESSION["email"] = $row["email"];
+                    }
+            }
+
+        /*  
+            Se l'Utente inserisce la Mail 
+            e la Password NON corretti
+        */
+        if ($password != $_SESSION["password"] && $email != $_SESSION["email"]) {
+            echo "
+                <div class=\"form\">
+                    <b>Username</b> e <b>Password</b> non corretti <br>
+                    <a href=\"./../html/logininsegnante.html\">
+                        <button class=\"btn btn-primary\">Ritorna alla pagina di Login</button>
+                    </a>
+                </div>";
+                exit;
+        }
+
+        /*  
+            Se l'Utente inserisce la Mail corretta 
+            e la Password NON corretta
+        */
+        if ($password != $_SESSION["password"] && $email == $_SESSION["email"]) {
+            echo "
+                <div class=\"form\">
+                    <b>Password</b> non corretta <br>
+                    <a href=\"./../html/logininsegnante.html\">
+                        <button class=\"btn btn-primary\">Ritorna alla pagina di Login</button>
+                    </a>
+                </div>";
+                exit;
+        }
+
+        //Se Email e Password sono giuste, l'utente accede alla pagina degli esami
+
+        if ($password == $_SESSION["password"] && $email == $_SESSION["email"]) {
+            header("Location:esamiinsegnante.php");
+        }   
     }
+
     /*  
         Se l'Utente NON inserisce nè la Mail 
         nè la Password
     */
+
       if ($email==null && $password==null) {
         echo "
             <div class=\"form\">
@@ -84,12 +129,15 @@
                 </a>
             </div>";
     }
+
     /*  
         Se l'utente inserisce la Password 
         ma NON inserisce la Mail
     */
-    if ($email==null && $password!=null) {
+
+    if ($email == null && $password!=null) {
         echo "
+        <body class=\"body\">
             <div class=\"form\">
                 Devi specificare la tua <b>Email</b> <br>
                 <a href=\"./../html/logininsegnante.html\">
