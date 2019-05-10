@@ -80,6 +80,7 @@ if ($result->num_rows > 0) {
         <th>Data</th>
         <th>Orario</th>
         <th>Aula</th>
+        <th></th>
     </tr>
     "; 
 
