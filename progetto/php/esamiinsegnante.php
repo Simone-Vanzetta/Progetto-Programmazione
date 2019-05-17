@@ -72,7 +72,7 @@ $sql = "SELECT ID, Nome, Descrizione, Data, Orario, Aula FROM esami";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table class=\"table table-striped table-dark\" style=\"background-color: rgba(0, 0, 0, 0.5); margin-top: 10px;\">
+    echo "<table class=\"table table-striped table-dark\" style=\"background-color: rgba(0, 0, 0, 0.5); margin-top: 15px;\">
     <tr>
         <th>ID</th>
         <th>Nome</th>
