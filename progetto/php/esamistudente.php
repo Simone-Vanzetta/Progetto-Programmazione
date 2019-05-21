@@ -56,3 +56,53 @@
 </body>
 </html>
 
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "essequattro";
+
+///Creazione connessione
+
+$conn = mysqli_connect($servername, $username, $password, $dbname );
+
+// Controllo della connessione
+
+if (!$conn) {
+    die("Connessione al DB fallita: " . mysqli_connect_error());
+} 
+$matricolastudente = $_SESSION["matricola"];
+$sql = "SELECT ID, matricola, esami, voto FROM iscritti WHERE matricola = '$matricolastudente'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table class=\"table table-striped table-dark\" style=\"background-color: rgba(0, 0, 0, 0.5); margin-top: 15px;\">
+    <tr>
+        <th>ID iscrizione</th>
+        <th>Matricola</th>
+        <th>ID esame</th>
+        <th>Voto</th>
+        <th></th>
+    </tr>
+    "; 
+
+    // Output dei dati di ciascuna riga del Database   
+
+    while($row = $result->fetch_assoc()) {
+       
+       $id = $row["ID"];
+       $matricola = $row["matricola"];
+       $esami = $row["esami"];
+       $voto = $row["voto"];
+       
+
+    //Stampo in ogni riga della tabella HTML i dati del Database
+
+       echo "<tr><td>" . $row['ID'] . "</td><td>" . $row['matricola'] ."</td><td>". $row['esami'] ."</td><td>". $row['voto'] . "</td></tr>"; 
+    }
+    echo "</table>";
+   
+} 
+$conn->close();
+?>
