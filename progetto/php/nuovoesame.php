@@ -1,4 +1,4 @@
-<<html>
+<html>
 <head>
     <link rel="stylesheet" href="./../css/bootstrap.min.css">
     <link rel="stylesheet" href="./../css/style.css">
@@ -8,6 +8,15 @@
 </html>
 <?php
 session_start();
+
+/*
+  Se l'Utente prova ad accedere alla pagina
+  direttamente dall'URL senza aver fatto il Login,
+  viene reindirizzato alla pagina "index.html"
+*/
+  if (!isset($_SESSION["email"]) && !isset($_SESSION["password"])) {
+    header("Location:./../html/index.html");
+  }
 
 /*
 Includo il file FormUserInput per controllare
@@ -21,6 +30,7 @@ $descrizione = ReadString("descrizione");
 $data = ReadString("data");
 $orario = ReadString("orario");
 $aula = ReadString("aula");
+$cognomeprof = $_SESSION["cognome"];
 
 
 
@@ -41,8 +51,8 @@ if (!$conn) {
 
 //Inserisco i dati della form HTML nella tabella
 
-$sql = "INSERT INTO esami (Nome, Descrizione, Data, Orario, Dipartimento, Aula)
-VALUES ('".$nome."','".$descrizione."','".$data."','".$orario."','".$aula."');";
+$sql = "INSERT INTO esami (Nome, Descrizione, Data, Orario, Aula, professori)
+VALUES ('".$nome."','".$descrizione."','".$data."','".$orario."','".$aula."','".$cognomeprof."');";
 $result = $conn->query($sql);
 
 /*
