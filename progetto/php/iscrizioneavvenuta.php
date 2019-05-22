@@ -42,7 +42,7 @@ $esame = ReadInt("idesame",null);
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "essequattroo";
+$dbname = "essequattro";
 
 ///Creazione connessione
 
