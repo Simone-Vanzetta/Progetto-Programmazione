@@ -106,3 +106,9 @@ if ($result->num_rows > 0) {
 } 
 $conn->close();
 ?>
+
+<div class="card">
+      <a href="./../html/iscrizione.html">
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="exam" style="padding-top:15px;">Iscriviti a un Esame</button>
+      </a>
+</div>
